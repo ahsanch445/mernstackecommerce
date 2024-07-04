@@ -29,7 +29,7 @@ router.get("/products", async (req, res) => {
       sections: 1, // Then by sections
       item: 1, // Then by item
     });
-    console.log(products);
+
     res.json(products);
   } catch (err) {
     console.error(err);

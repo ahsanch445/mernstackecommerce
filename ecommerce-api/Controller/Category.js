@@ -26,7 +26,7 @@ const allNavCategories = async (req, res) => {
 const createCategories = async (req, res) => {
   let { Categoryname, section } = req.body;
   let { sectionname, itemsname } = section;
-  console.log(Categoryname, sectionname, itemsname);
+
   try {
     if (Categoryname && sectionname && itemsname) {
       const category = await CategoryModel.create({
@@ -43,7 +43,7 @@ const createCategories = async (req, res) => {
         ],
       });
       await category.save();
-      console.log(category);
+
       return res.status(200).json({ message: "Category Created Successfully" });
     } else {
       res.status(400).json({ message: "All fields are required" });
@@ -61,7 +61,6 @@ const allCategoriesNames = async (req, res) => {
   }
 };
 const addNewData = async (req, res) => {
-  console.log(req.body);
   if (!req.body.sectionname) return res.json("section name is required");
   if (!req.body.categoryname || req.body.categoryname == "Select Category") {
     return res.status(400).json({ message: "Category Name is must required" });

@@ -1,7 +1,6 @@
 const { findOne, findById } = require("../Models/Category-Model");
 const UserModel = require("../Models/User-Model");
 const getUserProfile = async (req, res) => {
-  console.log("hello mr");
   console.log(req.id);
   try {
     const user = await UserModel.findById(req.id, "-password");

@@ -87,7 +87,7 @@ toast.success(res.data.message)
 
   //  userprofile
   let token  = Cookies.get("token")
-  const userProfile =async ()=>{
+  const userProfile = async ()=>{
   
    
     try {

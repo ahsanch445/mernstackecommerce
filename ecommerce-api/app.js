@@ -10,6 +10,8 @@ var users = require("./routes/User");
 var auth = require("./routes/Authencation");
 const product = require("./routes/Product");
 var categories = require("./routes/Categories");
+var Stripe = require("./routes/Stripe");
+var Order = require("./routes/Order");
 var app = express();
 const session = require("express-session");
 var cors = require("cors");
@@ -37,11 +39,11 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 app.use("/auth", auth);
 app.use("/users", users);
+app.use("/order", Order);
 app.use("/product", product);
 app.use("/categories", categories);
-app.get("/", (req, res) => {
-  res.send("hello data");
-});
+app.use("/stripe", Stripe);
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

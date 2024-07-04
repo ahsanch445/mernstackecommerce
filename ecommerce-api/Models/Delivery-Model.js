@@ -1,32 +1,32 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 const DeliverySchema = mongoose.Schema({
-    firstName: {
-        type: String,
-        required: true,
-    },
-    lastName: {
-        type: String,
-        required: true,
-    },
-    address: {
-        type: String,
-        required: true
-    },
-    zip:{
-        type:Number,
-        required:true
-    },
-    state:{
-        type:String,
-        required:true
-    },
-    phoneNumber:{
-        type:String,
-        required:true
-    },
-    user:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"User"
-    }
-})
-module.exports = mongoose.model("DeliveryAddres",DeliverySchema)
+  FirstName: {
+    type: String,
+    required: true,
+  },
+  LastName: {
+    type: String,
+    required: true,
+  },
+  Address: {
+    type: String,
+    required: true,
+  },
+  Zip: {
+    type: Number,
+    required: true,
+  },
+  State: {
+    type: String,
+    required: true,
+  },
+  PhoneNumber: {
+    type: String,
+    required: true,
+  },
+  User: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user",
+  },
+});
+module.exports = mongoose.model("DeliveryAddres", DeliverySchema);

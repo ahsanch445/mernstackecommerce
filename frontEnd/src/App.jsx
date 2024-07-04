@@ -9,6 +9,8 @@ import ProductCard  from "./Costomer/Components/Products/Product"
 import ProductDetalis from './Costomer/Components/ProductDetalis/ProductDetalis'
 import Ratting from './Costomer/Components/RattingCard/Ratting'
 import Cart from './Costomer/Components/Cart/Cart'
+import AdminOrderPage from './Costomer/Pages/OrdersPage/Order'
+import AdminOrderDetails from "./Costomer/Pages/OrdersPage/OrdersDetails"
 import Stepper from './Costomer/Components/CartPayment/Stepper'
 import OrderDetail from './Costomer/Components/OrderDetails/OrderDetail'
 import OrderPlaced from './Costomer/Components/OrderPlacedDetails/OrderPlaced'
@@ -75,6 +77,8 @@ let user
       <Route path='/Checkout/:id' element={<Cart/>}></Route>
       <Route path='/checkout' element={<DeliveryAddress/>}></Route>
       <Route path='/account/myorder' element={<OrderDetail/>}></Route>
+      <Route path='/admin/orders' element={<AdminOrderPage />}></Route>
+      <Route path='/admin/orders/details' element={<AdminOrderDetails />}></Route>
       <Route path='/account/myorder/:id' element={<OrderPlaced/>}></Route>
      
       

@@ -7,10 +7,10 @@ export const toastContext = createContext()
 const ToastMessage = ({children})=>{
 const [userLogout, setuserLogout] = useState(null)
 const [ForceUpdate, setForceUpdate] = useState("")
-
+const [toggle, settoggle] = useState(null)
 
 return(
-    <toastContext.Provider value={{userLogout, setuserLogout,ForceUpdate, setForceUpdate,}}>
+    <toastContext.Provider value={{userLogout, toggle, settoggle, setuserLogout,ForceUpdate, setForceUpdate,}}>
 
     {children}
 </toastContext.Provider>

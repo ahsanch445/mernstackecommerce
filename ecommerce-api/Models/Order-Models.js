@@ -1,66 +1,68 @@
-const mongoose = require("mongoose")
-const DeliverySchema = mongoose.Schema({
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
-    },
-    orderItems: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-    },
-    orderAddress: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: "DeliveryAddres"
-    },
-    orderDate: {
-        type: Date,
-        default: Date.now()
-    },
-    deliveryDate: {
-        type: Date,
+const mongoose = require("mongoose");
 
+const ProductSchema = new mongoose.Schema(
+  {
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User", // Assuming you have a User model
+      required: true,
     },
-    pymentDeatil: {
-        paymentMethod: {
-            type: String,
-        },
-        transactionId: {
-            type: String
-        },
-        pymentId: {
-            type: String
-        },
-        pymentStatus: {
-            type: String
-        }
+    productQuantity: {
+      type: Number,
+      required: true,
     },
-    toltlePrice: {
-        type: Number,
-        required: true,
+    Size: {
+      type: [String],
+      required: true,
+    },
 
+    productSize: {
+      type: String,
+      required: true,
     },
-    discountedPrice: {
-        type: Number,
-        required: true
+    productname: {
+      type: String,
+      required: true,
     },
-    discount: {
-        type: Number,
-        required: true
+    descripsion: {
+      type: String,
     },
-    orderStatus: {
-        type: String,
-        required: true,
+    productimage: {
+      type: [String],
+      required: true,
+    },
+    discountParacentage: {
+      type: Number,
+      required: true,
+    },
+    sections: {
+      type: String,
+      required: true,
+    },
+    Categoryname: {
+      type: String,
+      required: true,
+    },
+    item: {
+      type: String,
+      required: true,
+    },
+    brandname: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    selling_price: {
+      type: Number,
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
 
-    },
-    totleItems: {
-        type: Number,
-        required: true
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now()
-    }
+const Product = mongoose.model("myOrders", ProductSchema);
 
-})
-module.exports = mongoose.model("Order", DeliverySchema)
+module.exports = Product;

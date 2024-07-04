@@ -14,7 +14,7 @@ const getAllProducts = async (req, res) => {
 //delete images from product for update product
 const deleteImages = async (req, res) => {
   // delete or upadate imagess
-  console.log(req.body);
+
   try {
     if (req.body.url) {
       const product = await ProductDataModel.findById(req.body.id);
@@ -42,7 +42,7 @@ const deleteImages = async (req, res) => {
 
 const createProduct = async (req, res) => {
   let img = req?.files?.map((e) => e.path) || [];
-  console.log(req.body);
+
   let {
     productname,
     brandname,
@@ -234,7 +234,7 @@ const GetProductAndUpdate = async (req, res) => {
 const GetProductAndDelete = async (req, res) => {
   try {
     const productId = req.params.id;
-    console.log(productId);
+
     const product = await ProductDataModel.findByIdAndDelete(productId);
     return res
       .status(200)
@@ -245,7 +245,6 @@ const GetProductAndDelete = async (req, res) => {
 };
 
 const UserReviews = async (req, res) => {
-  console.log(req.body);
   try {
     let { ratting, comment, userId } = req.body;
     let data = { ratting, comment, userId };
