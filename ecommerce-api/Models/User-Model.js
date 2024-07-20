@@ -46,6 +46,7 @@ const UserSchema = new mongoose.Schema({
   sub: {
     type: String,
     unique: true,
+    sparse: true,
   },
 });
 const User = mongoose.model("User", UserSchema);

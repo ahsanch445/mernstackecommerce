@@ -1,29 +1,44 @@
 import React from 'react'
 import AdjustIcon from '@mui/icons-material/Adjust';
 import { useNavigate } from 'react-router-dom';
-const OrderData = () => {
+import moments from 'moment'
+import ReviewsIcon from '@mui/icons-material/Reviews';
+
+const OrderData = ({data,deliveryStatus,createdAt,handleData}) => {
+
   let Navigate = useNavigate()
   return (
-    <div onClick={()=>{
-      Navigate(`/account/myorder/${6}`)
-    }} className=' cursor-pointer p-4 h-fit box flex justify-between  mt-4'>
+ <>
+    <div  className=' cursor-pointer p-4 h-fit box flex justify-between  mt-4'>
+      
       <div className='flex gap-2 tracking-tighter'>
-        <img className='w-16 h-16 object-cover object-top rounded' src="https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bWVuJTIwc3VpdHxlbnwwfHwwfHx8MA%3D%3D" alt="" />
+        <img className='w-16 h-[70px] object-cover object-top rounded' src={data?.image} alt="" />
         <div >
-            <p className='font-medium leading-none '>Men Slim kurta Blacks jeans</p>
-            <p className=' text-xs'>Size L</p>
-            <p className='text-xs'>Color Black</p>
+            <p className='font-medium leading-none '>{data?.name}</p>
+            <p className=' text-xs'><span className='text-sm font-normal'>Size :</span> { data?.productSize}</p>
+            <p className=' text-xs'><span className='text-sm font-normal'>Brand :</span> { data?.brand}</p>
+            <p className='text-xs'><span className='text-sm font-normal'>Quantity :</span> {data?.productQuantity}</p>
         </div>
       </div>
-      <div><p>Rs3000</p></div>
+     <div className='flex flex-col gap-6 absolute left-[40%] justify-center items-center'>
+     <div><p>Rs{data.price}</p></div>
+
+     {
+      deliveryStatus=="Delivered Order"?<div> <button  onClick={()=>handleData(data.productId)} className='  p-1   rounded text-green-600 '><ReviewsIcon/> </button></div>:""
+
+     }
+     </div>
       <div>
         <div className='flex items-center'>
             < AdjustIcon style={{color:"green",fontSize:"2vw"}}/>
-            <h1 className='text-[1.5vw] font-medium'>Expected Delivery On Mar 03</h1>
+            <h1 className='text-[1.5vw] font-medium'>Expected Delivery On {moments(createdAt).add(5, 'days').format("DD-MM-YYYY")}</h1>
         </div>
-        <p className='text-[1.3vw] ml-2'>You order has been delivered</p>
+        <p className='text-[1.3vw] ml-2'>You order has been {deliveryStatus}</p>
       </div>
     </div>
+
+     
+ </>
   )
 }
 

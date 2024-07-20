@@ -8,51 +8,60 @@ const sendVerificationEmail = require("../helper/nodemailer");
 const Token = require("../Models/Token");
 var GoogleStrategy = require("passport-google-oauth20").Strategy;
 var passport = require("passport");
+var { v4: uuidv4 } = require("uuid");
 const RegisterAuthencation = async (req, res) => {
-  // Replace with your actual verification link
-
   const { fullname, username, email, password } = req.body;
-  console.log(req.body);
-  var isEmail = validator.validate(email);
-  const exitsUser = await UserModel.findOne({
-    email: email,
-  });
 
-  if (exitsUser?.isVerified) {
-    res.status(409).json({ message: "Email is Already Exits" });
-  } else if (!isEmail) {
-    res.status(400).json({ message: "Please Enter a Valid Email" });
-  } else if (
-    fullname.length <= 6 ||
-    username.length <= 6 ||
-    password.length <= 6
-  ) {
-    res.status(400).json({ message: "Minimum 6 Letters are required" });
-  } else {
+  const isEmail = validator.validate(email);
+
+  try {
+    // Check if the email already exists
+    const existingUser = await UserModel.findOne({ email });
+
+    if (existingUser && existingUser.isVerified) {
+      return res.status(409).json({ message: "Email already exists" });
+    }
+
+    if (!isEmail) {
+      return res.status(400).json({ message: "Please enter a valid email" });
+    }
+
+    if (fullname.length <= 6 || username.length <= 6 || password.length <= 6) {
+      return res
+        .status(400)
+        .json({ message: "Minimum 6 characters are required" });
+    }
+
+    // Hash the password
     const bcryptPassword = await hash(password, 10);
-    const User = new UserModel({
-      fullname: fullname,
-      username: username,
-      email: email,
+
+    // Create a new user
+    const user = new UserModel({
+      fullname,
+      username,
+      email,
+      sub: uuidv4(),
       password: bcryptPassword,
     });
-    await User.save();
-    if (!User.isVerified) {
-      try {
-        const token = await new Token({
-          userId: User._id,
-          token: crypto.randomBytes(16).toString("hex"),
-        });
-        await token.save();
-        const verificationLink = `http://localhost:5173/auth/verifiy/${token.token}`;
-        await sendVerificationEmail(email, verificationLink);
-      } catch (error) {
-        res.status(400).json(error.message);
-      }
+
+    await user.save();
+
+    if (!user.isVerified) {
+      const token = new Token({
+        userId: user._id,
+        token: crypto.randomBytes(16).toString("hex"),
+      });
+      await token.save();
+
+      const verificationLink = `http://localhost:5173/auth/verifiy/${token.token}`;
+      await sendVerificationEmail(email, verificationLink);
+
+      return res
+        .status(200)
+        .json({ message: "Verification email sent. Please check your email" });
     }
-    res
-      .status(200)
-      .json({ message: "Verification email sent. Please check your email" });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
   }
 };
 

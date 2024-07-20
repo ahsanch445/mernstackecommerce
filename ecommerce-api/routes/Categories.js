@@ -9,6 +9,9 @@ var {
   allCategoriesNames,
   addNewData,
   addNewDataItem,
+  getAllCategories,
+  UpdateCategory,
+  findOneCategory,
 } = require("../Controller/Category");
 
 /* GET users listing. */
@@ -18,8 +21,10 @@ router.get("/all", allCategories);
 
 router.get("/name", allCategoriesNames);
 router.get("/nav/all", allNavCategories);
+router.get("/allcategories", getAllCategories);
 router.post("/create", createCategories);
 router.delete("/delete/:id", deleteCategory);
-// router.put("/update/:id", updateCategory);
+router.post("/update", UpdateCategory);
+router.put("/getCategory/:id", findOneCategory);
 
 module.exports = router;

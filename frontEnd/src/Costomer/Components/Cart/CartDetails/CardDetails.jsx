@@ -1,8 +1,11 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+import Stripe from '../../Stripe/Stripe';
 
 const CardDetails = ({handleRemoveCart,Cart}) => {
-  
+    let location = useLocation()
+    let myData = location.state?.size
+   
     let totlePrice = Cart.reduce((accumulator, ele) => {
         return accumulator + ele.selling_price * ele.productQuantity;
       }, 0);
@@ -12,13 +15,14 @@ const CardDetails = ({handleRemoveCart,Cart}) => {
       }, 0);
    
       let discountPrice = Price-totlePrice
-      console.log(discountPrice)
-    let navigate = useNavigate()
+      
+
+
   return (
     <>
     {
         Cart.length !=[]?
-        <div className='w-80 h-60 box p-5'>
+        <div className='w-80 h-60  box p-5'>
         <h1 className='font-thin'>PRODUCT DETAILS</h1>
         <div className='mt-3 flex justify-between'>
             <p>Price ({Cart.length})</p>
@@ -37,8 +41,9 @@ const CardDetails = ({handleRemoveCart,Cart}) => {
             <p className='text-green-600'>Rs {totlePrice}</p>
         </div>
         <button onClick={()=>{
-            navigate("/checkout?=2")
-        }}  className='w-full mt-3 bg-[#4141ff] p-1 rounded-md text-[white] '>Check Out</button>
+            // navigate("/checkout?=2")
+
+        }}  className='w-full mt-3 bg-[#4141ff] p-1 rounded-md text-[white] '><Stripe myData={myData} Cart={Cart}/></button>
             </div>
         :""
     }

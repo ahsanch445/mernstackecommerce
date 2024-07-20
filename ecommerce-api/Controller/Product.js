@@ -2,6 +2,7 @@ const CategoryModel = require("../Models/Category-Model");
 const ProductDataModel = require("../Models/ProductData-Model");
 const User = require("../Models/User-Model");
 const Cloudinary = require("../helper/cloudinary");
+var rattingModel = require("../Models/Ratting-Model");
 const getAllProducts = async (req, res) => {
   try {
     let allProducts = await ProductDataModel.find().sort({ createdAt: -1 });
@@ -147,7 +148,7 @@ const GetCategoryProduct = async (req, res) => {
       sections: sectionname,
       item: itemsname,
     });
-    console.log(product);
+
     return res.json({ message: "Product", product });
   } catch (error) {
     res.status(500).json(error);
@@ -156,6 +157,7 @@ const GetCategoryProduct = async (req, res) => {
 
 const GetProductAndUpdate = async (req, res) => {
   let productId = req.params.id;
+
   const existingProduct = await ProductDataModel.findById(productId);
 
   let newImages = req?.files?.map((e) => e.path) || [];
@@ -169,6 +171,7 @@ const GetProductAndUpdate = async (req, res) => {
     descripsion,
     price,
     selling_price,
+    average,
   } = req.body;
   let priceNum = parseFloat(price);
   let selling_priceNum = parseFloat(selling_price);
@@ -196,6 +199,7 @@ const GetProductAndUpdate = async (req, res) => {
         existingProduct.categoryname = categoryname;
         existingProduct.descripsion = descripsion;
         existingProduct.price = price;
+
         existingProduct.selling_price = selling_price;
         existingProduct.productimage = updatedImages;
         (existingProduct.sections = sectionname),
@@ -225,9 +229,11 @@ const GetProductAndUpdate = async (req, res) => {
     // Combine existing images with new images
   } catch (error) {
     console.error(error);
-    return res
-      .status(500)
-      .json({ success: false, message: "Server error", error: error.message });
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+      error: error.message,
+    });
   }
 };
 
@@ -236,29 +242,81 @@ const GetProductAndDelete = async (req, res) => {
     const productId = req.params.id;
 
     const product = await ProductDataModel.findByIdAndDelete(productId);
-    return res
-      .status(200)
-      .json({ message: "Product deleted successfully", product: product });
+    return res.status(200).json({ message: "Product deleted successfully" });
   } catch (error) {
     res.status(500).json(error);
   }
 };
 
 const UserReviews = async (req, res) => {
+  let { rattng, reviews, userId } = req.body;
   try {
-    let { ratting, comment, userId } = req.body;
-    let data = { ratting, comment, userId };
+    let ratting = await rattingModel.create({
+      userId: userId,
+      review: reviews,
+      rating: rattng,
+      productId: req.params.id,
+    });
+    await ratting.save();
+    let ratting2 = await rattingModel
+      .find({ productId: req.params.id })
+      .populate("userId");
+    let totalRates = ratting2.reduce((sum, cur) => sum + cur.rating, 0);
+    let average = totalRates / ratting2.length;
+    if (average) {
+      let ratting = Math.floor(average);
 
-    let product = await ProductDataModel.findById(req.params.id);
+      let product = await ProductDataModel.findByIdAndUpdate(
+        req.params.id,
+        {
+          ratting: ratting,
+        },
+        { new: true }
+      );
 
-    if (!product) {
-      return res.status(404).json({ message: "Product not found" });
+      return res
+        .status(200)
+        .json({ message: "Average is updated successfully", product });
     }
-    product.review.push(data);
-    await product.save();
-    return res.status(200).json({ message: "Rated Successfully" });
   } catch (error) {
     res.status(500).json(error);
+  }
+};
+
+const fetchingReviews = async (req, res) => {
+  // Ensure page and limit are retrieved from request query with defaults
+  let page = parseInt(req.body.page) || 1;
+  let limit = parseInt(req.body.limit) || 10;
+  if (page == 1) {
+    limit = 1;
+  } else {
+    limit = limit;
+  }
+
+  try {
+    const skip = page === 1 ? 0 : 1 + (page - 2) * limit;
+    // Fetch the ratings for the specific product
+    let ratting = await rattingModel
+      .find({ productId: req.params.id })
+      .populate("userId")
+      .skip(skip)
+      .limit(limit);
+
+    // Count total number of ratings for the product
+    const totalItems = await rattingModel.countDocuments({
+      productId: req.params.id,
+    });
+
+    // Return response with fetched ratings, total pages and current page
+    res.json({
+      ratting,
+      totalPages: Math.ceil(totalItems / limit),
+      currentPage: page,
+    });
+  } catch (error) {
+    // Log the error and send a 500 status with the error message
+    console.error("Error fetching reviews:", error);
+    res.status(500).json({ message: "Error fetching reviews", error });
   }
 };
 module.exports = {
@@ -269,4 +327,5 @@ module.exports = {
   GetProductAndDelete,
   UserReviews,
   deleteImages,
+  fetchingReviews,
 };

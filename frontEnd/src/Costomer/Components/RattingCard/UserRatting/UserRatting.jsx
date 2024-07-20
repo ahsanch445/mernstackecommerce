@@ -1,7 +1,8 @@
 import React from 'react'
 import { Avatar, Box, Grid } from '@mui/material'
 import Rating from '@mui/material/Rating';
-const UserRatting = () => {
+import moment from 'moment'
+const UserRatting = ({data}) => {
   return (
     <div >
         <br />
@@ -19,13 +20,13 @@ R
    <div className='space-y-2'>
    <div>
         <p className='font-semibold'>
-            Ahsan 
+    {data?.userId?.fullname}
         </p>
         <p className="opacity-80">
-            April,4,2024
+            {moment(data?.createdAt).fromNow()}
         </p>
-        <Rating   style={{fontSize:"20px"}} readOnly  className='h-fit  leading-none' name="haif-rating"  value={2.5}  />
-        <h3  className=' opacity-85 leading-none'>nice product i ever purchase</h3>
+        <Rating   style={{fontSize:"20px"}} readOnly  className='h-fit  leading-none' name="haif-rating"  value={data.rating}  />
+        <h3  className=' opacity-85 leading-none'>{data?.review}</h3>
     </div>
    </div>
    

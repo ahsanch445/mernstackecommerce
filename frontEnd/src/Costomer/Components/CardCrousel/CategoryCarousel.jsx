@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Card from "../HomeCard/Card";
@@ -7,20 +7,23 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { KurtaData } from "../../Data/KurtaData";
 import axios from 'axios';
 import CategoryProducts from '../CategoryProducts/CategoryProducts';
+import { toastContext } from '../../../Context-Api/Context';
 
 const CategoryCarousel = (props) => {
 
  
  
 const [product, setCateProduct] = useState([])
+let {search}=useContext(toastContext)
 
 let filterCateProduct = product.filter((data)=>{
   return(
     data.Categoryname.includes(props.category.Categoryname)
   )
 })
+let data = filterCateProduct.filter((item) => item?.productname.toLowerCase().includes(search?.toLowerCase()));
 
-
+console.log(data)
 const sendDataToBackend = async () => {
   
   
@@ -82,7 +85,7 @@ const sendDataToBackend = async () => {
   return (
     <>
       <div  style={{ border: "2px #bebaba88 solid " }} >
-       {filterCateProduct.length>=0? <h1 className='m-2 font-bold text-lg'>Top {props?.category?.Categoryname} Items</h1>:""}
+       {filterCateProduct.length>0? <h1 className='m-2 font-bold text-lg'>Top {props?.category?.Categoryname} Items</h1>:""}
      
         <div className="relative ">
           <Carousel
@@ -93,7 +96,7 @@ const sendDataToBackend = async () => {
           >
         
      
-        {filterCateProduct?.map((e, index) => (
+        {data?.map((e, index) => (
               <CategoryProducts key={index} data={e} />
             ))}
     

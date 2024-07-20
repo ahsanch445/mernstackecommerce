@@ -2,67 +2,41 @@ const mongoose = require("mongoose");
 
 const ProductSchema = new mongoose.Schema(
   {
-    userId: {
+    orderData: {
+      type: Array,
+      default: [],
+      required: true,
+    },
+    deliveryAddrss: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User", // Assuming you have a User model
       required: true,
-    },
-    productQuantity: {
-      type: Number,
-      required: true,
-    },
-    Size: {
-      type: [String],
-      required: true,
+
+      ref: "DeliveryAddres",
     },
 
-    productSize: {
+    deliveryStatus: {
+      type: String,
+      default: "Pending",
+    },
+    paymentMethod: {
       type: String,
       required: true,
     },
-    productname: {
-      type: String,
-      required: true,
-    },
-    descripsion: {
-      type: String,
-    },
-    productimage: {
-      type: [String],
-      required: true,
-    },
-    discountParacentage: {
+    quantity: {
       type: Number,
-      required: true,
     },
-    sections: {
+
+    paymentStatus: {
       type: String,
-      required: true,
+      default: "Pending",
     },
-    Categoryname: {
-      type: String,
-      required: true,
-    },
-    item: {
-      type: String,
-      required: true,
-    },
-    brandname: {
-      type: String,
-      required: true,
-    },
-    price: {
-      type: Number,
-      required: true,
-    },
-    selling_price: {
+    totalPrice: {
       type: Number,
       required: true,
     },
   },
   { timestamps: true }
 );
-
-const Product = mongoose.model("myOrders", ProductSchema);
+const Product = mongoose.model("Adminorders", ProductSchema);
 
 module.exports = Product;

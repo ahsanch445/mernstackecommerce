@@ -1,15 +1,37 @@
 import React, { useContext, useEffect ,useState} from 'react'
 import Crousel from '../../Components/HomeCrousel/Crousel'
 import CategoryCarousel from '../../Components/CardCrousel/CategoryCarousel'
-
+import Cookies from 'js-cookie'
 import { toastContext } from '../../../Context-Api/Context'
 import { ToastContainer, toast } from 'react-toastify'
-
+import Footer from '../../Components/Footers/Footer'
 import { CategoryData } from '../../Common/APi'
+import axios from 'axios'
 
 const Home = () => {
 let {userRegister,setuserRegister} = useContext(toastContext)
 const [Category, setCategory] = useState([])
+let token = Cookies.get("token")
+
+useEffect(() => {
+ const getUser = async () => {
+
+  try {
+    const res = await axios.get("http://localhost:3000/users/profile",{
+      headers:{
+        Authorization:`${token}`
+      }
+    })
+    localStorage.setItem("user",JSON.stringify(res.data))
+     console.log(res.data)
+  } catch (error) {
+    console.log(error.message)
+  }
+ }
+  getUser()
+
+}, [])
+
 useEffect(() => {
   if(userRegister){
     toast.success(userRegister)
@@ -49,7 +71,7 @@ setCategory(data.category)
        
       
     </div>
-    
+    <Footer/>
     </>
   )
 }

@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import CloseIcon from '@material-ui/icons/Close';
 import CreateProducts from "../CreateProduct/CreateProducts";
 import { ToastContainer, toast } from "react-toastify";
+import DotLoader from "../DotLoader/DotLoader";
+import Loader from "../Loader/Loader";
 const CategoryItems = ({categoryData, sectionData,isOpenItems, setisOpenItems }) => {
   if (!isOpenItems) return null;
   const [section, setsection] = useState({
@@ -11,7 +13,7 @@ const CategoryItems = ({categoryData, sectionData,isOpenItems, setisOpenItems })
     sectionname: "",
     itemsname: "",
   });
-
+const [isLoading, setisLoading] = useState(false)
 const [successMessage, setsuccessMessage] = useState(null)
   console.log(sectionData)
 // const [isOpenPortalFeatured, setisOpenPortalFeatured] = useState(false)
@@ -39,6 +41,7 @@ let data = filterData[0]
   };
 
   const handalCilckCategory = async () => {
+    setisLoading(true)
     try {
       let res = await axios.post("http://localhost:3000/categories/addnew2", 
         section,
@@ -53,8 +56,9 @@ let data = filterData[0]
       categoryname:"",
       itemsname:""
      })
+     setisLoading(false)
     } catch (error) {
-    
+    setisLoading(false)
       console.error(error);
       setsuccessMessage(error?.response?.data?.message)
     }
@@ -79,7 +83,12 @@ let data = filterData[0]
             <CloseIcon/>
           </span>
           <div>
-            <h1 className="font-bold">Create Category</h1>
+            <h1 className="font-bold">Create Category Items</h1>
+            <div>
+              {
+                isLoading?<Loader/>:""
+              }
+            </div>
           </div>
           <div className="flex flex-col mt-3">
           <select value={section.categoryname} onChange={handalCategory} name="categoryname" className="bg-gray-200 p-2 rounded-md outline-none">
@@ -137,7 +146,9 @@ let data = filterData[0]
                 className="bg-blue-700 text-white px-5 py-2 w-2/3 text-lg font-semibold rounded-md"
                  onClick={handalCilckCategory }
               >
-              Create Section
+              {
+                isLoading?<DotLoader/>:"Create Section"
+              }
               </button>
             
             </div>

@@ -1,0 +1,238 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  color: #545454;
+  font-family: "Open Sans", sans-serif;
+}
+
+.wrapper {
+  margin: 0 auto;
+  max-width: 960px;
+  width: 100%;
+}
+
+.master {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-top: 40px;
+}
+
+h1 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+h2 {
+  line-height: 160%;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.rating-component {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.rating-component .status-msg {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.rating-component .status-msg strong {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.rating-component .stars-box {
+  -ms-flex-item-align: center;
+  align-self: center;
+  margin-bottom: 15px;
+}
+
+.rating-component .stars-box .star {
+  color: #ccc;
+  cursor: pointer;
+}
+
+.rating-component .stars-box .star.hover {
+  color: #ff5a49;
+}
+
+.rating-component .stars-box .star.selected {
+  color: #ff5a49;
+}
+
+.feedback-tags {
+  min-height: 119px;
+}
+
+.feedback-tags .tags-container {
+  display: none;
+}
+
+.feedback-tags .tags-container .question-tag {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.feedback-tags .tags-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  text-align: center;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.feedback-tags .tags-container .make-compliment {
+  padding-bottom: 20px;
+}
+
+.feedback-tags .tags-container .make-compliment .compliment-container {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: #000;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.feedback-tags .tags-container .make-compliment .compliment-container .fa-smile-wink {
+  color: #ff5a49;
+  cursor: pointer;
+  font-size: 40px;
+  -webkit-animation-name: compliment;
+  animation-name: compliment;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+}
+
+.feedback-tags .tag {
+  border: 1px solid #ff5a49;
+  border-radius: 5px;
+  color: #ff5a49;
+  cursor: pointer;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  padding: 10px;
+}
+
+.feedback-tags .tag.choosed {
+  background-color: #ff5a49;
+  color: #fff;
+}
+
+.button-box .done {
+  background-color: #ff5a49;
+  border: 1px solid #ff5a49;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  display: none;
+  min-width: 100px;
+  padding: 10px;
+}
+
+.button-box .done:disabled,
+.button-box .done[disabled] {
+  border: 1px solid #ff9b95;
+  background-color: #ff9b95;
+  color: #fff;
+  cursor: not-allowed;
+}
+
+.submited-box {
+  background-color: #ffffffe6;
+  height: 100%;
+  left: 0;
+  padding: 10px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+}
+
+.submited-box .loader {
+  background-image: url('https://res.cloudinary.com/dcyafbpoh/image/upload/v1584275735/loader_t7p3qz.gif');
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100px;
+  margin: 0 auto;
+  width: 100px;
+}
+
+.submited-box .success-message {
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #ff5a49;
+  font-size: 20px;
+  margin: 20px auto;
+  padding: 20px;
+  text-align: center;
+  width: 300px;
+}
+
+@-webkit-keyframes compliment {
+  from {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes compliment {
+  from {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}

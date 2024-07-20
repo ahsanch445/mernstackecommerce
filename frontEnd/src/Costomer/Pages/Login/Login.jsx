@@ -50,16 +50,18 @@ const Login = () => {
 e.preventDefault()
 try {
   let res = await axios.post("http://localhost:3000/auth/login",LoginForm)
-  setuserRegister(res.data.message)
+  toast.success(res.data.message)
+  
   if(res.data.token){
+     
    cookies.set("token",res.data.token)
    navigate("/")
  
   }
 } catch (error) {
   console.log(error)
-  toast.error(error.response.data.message)
-  console.error(error.message)
+  toast.error(error?.response?.data?.message)
+  console.error(error)
 }
   }
 
@@ -69,7 +71,7 @@ try {
     <ToastContainer/>
       <div className="flex justify-center items-center h-[100vh] w-full">
         <div className="login-container lg:w-3/4  ">
-          <form onSubmit={onSubmit }  style={{boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px"}} className="login-form bg-[#ffff] fixed px-16 py-6 rounded-md flex justify-center items-center  h-[80vh] lg:gap-1">
+          <form onSubmit={onSubmit }  style={{boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px"}} className="login-form bg-[#ffff]  fixed px-16 py-6 rounded-md flex justify-center items-center  lg:gap-1">
             <h1 className="text-7xl lg:text-4xl">Welcome Back</h1>
             <p className="text-3xl lg:text-lg mt-7 lg:mt-2">Please login to your account</p>
             <div className="input-group mt-7 lg:mt-5 ">
@@ -95,7 +97,7 @@ try {
             </div>
             <div className="w-full  flex justify-center">
               <button
-                className="bg-[#007bff]  butto p-7 lg:p-1 text-4xl lg:text-xl mt-2 w-[550px] lg:w-56"
+                className="bg-[#007bff]  butto p-7 lg:p-1 text-4xl lg:text-xl mt- w-[550px] lg:w-56"
                 type="submit"
               >
                 Login
@@ -107,11 +109,11 @@ try {
               
               </p>
               <p className="text-4xl lg:text-lg   ">
-              <a href="#">Forgot password?</a>
+             
                </p>
              
             </div>
-           <div className=" flex justify-center mt-6">
+           <div className=" flex justify-center mt-3">
            <Outh/>
            </div>
           </form>

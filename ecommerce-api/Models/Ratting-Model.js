@@ -1,22 +1,34 @@
 const mongoose = require("mongoose");
-const UserSchema = new mongoose.Schema({
-  ratting: {
-    type: Number,
-    required: true,
-  },
-  user: {
+const { Schema } = mongoose;
+
+// Rating and Review Schema
+const ratingReviewSchema = new Schema({
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
+    required: true,
   },
-  product: {
+  productId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "product",
+    required: true,
   },
-
+  rating: {
+    type: Number,
+    min: 1,
+    max: 5,
+    required: true,
+  },
+  review: {
+    type: String,
+    required: false,
+  },
   createdAt: {
     type: Date,
-    default: Date.now(),
+    default: Date.now,
   },
 });
-const User = mongoose.model("ratting", UserSchema);
-module.exports = User;
+
+const RatingReview = mongoose.model("RatingReview", ratingReviewSchema);
+
+module.exports = RatingReview;

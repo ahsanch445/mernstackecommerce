@@ -133,10 +133,63 @@ const addNewDataItem = async (req, res) => {
   }
 };
 
+const getAllCategories = async (req, res) => {
+  try {
+    var category = await CategoryModel.find();
+
+    return res.status(200).json({ message: "All Categories", category });
+  } catch (error) {
+    return res.status(500).json(error.message);
+  } //category
+};
+
 const deleteCategory = async (req, res) => {
   try {
-    await categoryModel.findByIdAndDelete(req.params.id);
+    await CategoryModel.findByIdAndDelete(req.params.id);
     return res.status(200).json({ message: "Category Deleted Successfully" });
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+const UpdateCategory = async (req, res) => {
+  try {
+    const { id, categoryName, sections, items } = req.body;
+
+    // Convert sections and items to the correct format
+    const sectionsArray = [
+      {
+        name: sections,
+        items: [{ name: items }],
+      },
+    ];
+
+    // Find the category by ID and update
+    const updatedCategory = await CategoryModel.findByIdAndUpdate(
+      id,
+      {
+        Categoryname: categoryName,
+        sections: sectionsArray,
+      },
+      { new: true } // Return the updated document
+    );
+
+    if (!updatedCategory) {
+      return res.status(404).json({ message: "Category not found" });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Category updated successfully",
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Error updating category", error });
+  }
+};
+
+const findOneCategory = async (req, res) => {
+  try {
+    let category = await CategoryModel.findById(req.params.id);
+    return res.status(200).json({ message: "Category Found", category });
   } catch (error) {
     res.status(500).json(error.message);
   }
@@ -149,4 +202,7 @@ module.exports = {
   allNavCategories,
   allCategoriesNames,
   addNewData,
+  getAllCategories,
+  UpdateCategory,
+  findOneCategory,
 };

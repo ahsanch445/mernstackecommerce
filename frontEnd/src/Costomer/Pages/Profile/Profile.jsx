@@ -13,7 +13,7 @@ const Profile = () => {
 const [single, setsingle] = useState(null)
  
    const [user, setuser] = useState()
-   console.log("i", user)
+   
     
     useEffect(() => {
     
@@ -28,7 +28,7 @@ const [single, setsingle] = useState(null)
   
     <div className='flex'>
     
-    <div className='w-1/5 '>
+    <div className='w-1/5  bg-slate-100'>
        <UserDetails user={user}/>
      
     </div>

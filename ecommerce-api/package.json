@@ -28,6 +28,8 @@
     "passport": "^0.7.0",
     "passport-google-oauth2": "^0.2.0",
     "passport-google-oauth20": "^2.0.0",
-    "stripe": "^16.1.0"
+    "raw-body": "^2.5.2",
+    "stripe": "^16.1.0",
+    "uuid": "^10.0.0"
   }
 }

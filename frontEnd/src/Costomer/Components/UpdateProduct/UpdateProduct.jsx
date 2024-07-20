@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "../Loader/Loader"
+import DotLoader from "../DotLoader/DotLoader";
 const UpdateProduct = ({
   categoryname,
   close,
@@ -35,7 +36,7 @@ const UpdateProduct = ({
 let awssection= filteredcategory[0]?.sections[0]?.items?.map((elem)=>{
 return elem.name
 })
-console.log("the first",awssection)
+
   let sections = filteredcategory[0]?.sections?.items?.map((elem)=>{
 return elem.name
   })
@@ -175,9 +176,9 @@ return elem.name
 
   return (
     <>
-    
+   
      <div> 
-     <div className="flex justify-center items-center fixed z-40 left-[35vw] mt-16 top-0 ">
+     <div className="flex justify-center  items-center fixed z-40 left-[35vw] mt-16 top-0 ">
         <div className="w-[450px] h-[100vh] bg-[#ffff] overflow-y-scroll p-5">
           <span
             className=" w-full flex justify-end cursor-pointer "
@@ -191,6 +192,11 @@ return elem.name
             <h1 className="font-bold">Upload Product</h1>
            
           
+          </div>
+          <div>
+            {
+              isLoading?<Loader/>:""
+            }
           </div>
           <div className="flex flex-col mt-3">
             <label>Product Name:</label>
@@ -384,7 +390,9 @@ return elem.name
                 className="bg-blue-700 text-white px-5 py-2 text-lg font-semibold rounded-md"
                 onClick={productUpdate}
               >
-                UpdateProduct
+               {
+                isLoading?  <DotLoader data={"Update Product"}/>:"Update Product"
+               }
               </button>
             </div>
           </div>

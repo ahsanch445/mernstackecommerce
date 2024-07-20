@@ -2,6 +2,7 @@ var cloudinary = require("cloudinary").v2;
 
 const Cloudinary = () => {
   // Configuration
+
   cloudinary.config({
     cloud_name: "dxlhsjyyc",
     api_key: "385417853566955",

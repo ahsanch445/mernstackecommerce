@@ -4,11 +4,13 @@ import React, { useEffect, useState } from "react";
 import CloseIcon from '@material-ui/icons/Close';
 import CreateProducts from "../CreateProduct/CreateProducts";
 import { ToastContainer, toast } from "react-toastify";
+import Loader from "../Loader/Loader";
+import DotLoader from "../DotLoader/DotLoader";
 const CategorySection = ({ categoryData,isOpenSection, setisOpenSection }) => {
   if (!isOpenSection) return null;
-  
+
 const [successMessage, setsuccessMessage] = useState(null)
-  
+  const [isLoading, setisLoading] = useState(false)
 // const [isOpenPortalFeatured, setisOpenPortalFeatured] = useState(false)
  
   const [section, setsection] = useState({
@@ -16,7 +18,7 @@ const [successMessage, setsuccessMessage] = useState(null)
     sectionname: "",
     itemsname: "",
   });
-  console.log(section)
+  
 
   useEffect(() => {
     if (successMessage) {
@@ -39,6 +41,7 @@ const [successMessage, setsuccessMessage] = useState(null)
   };
 
   const handalCilckCategory = async () => {
+    setisLoading(true)
     try {
       let res = await axios.post("http://localhost:3000/categories/addnew", 
         section,
@@ -46,14 +49,14 @@ const [successMessage, setsuccessMessage] = useState(null)
       );
       
      setsuccessMessage(res?.data?.message)
-    
+     setisLoading(false)
      setsection({
       sectionname:"",
       categoryname:"",
       itemsname:""
      })
     } catch (error) {
-    
+      setisLoading(false)
       console.error(error);
       setsuccessMessage(error?.response?.data?.message)
     }
@@ -78,7 +81,12 @@ const [successMessage, setsuccessMessage] = useState(null)
             <CloseIcon/>
           </span>
           <div>
-            <h1 className="font-bold">Create Category</h1>
+            <h1 className="font-bold">Create Category Sections</h1>
+          </div>
+          <div>
+            {
+              isLoading?<Loader/>:""
+            }
           </div>
           <div className="flex flex-col mt-3">
           <select value={section.categoryname} onChange={handalCategory} name="categoryname" className="bg-gray-200 p-2 rounded-md outline-none">
@@ -132,7 +140,9 @@ const [successMessage, setsuccessMessage] = useState(null)
                 className="bg-blue-700 text-white px-5 py-2 w-2/3 text-lg font-semibold rounded-md"
                  onClick={handalCilckCategory }
               >
-              Create Section
+              {
+                isLoading?<DotLoader/>:"Create Section"
+              }
               </button>
             
             </div>

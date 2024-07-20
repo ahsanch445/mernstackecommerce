@@ -6,12 +6,14 @@ import CloseIcon from "@mui/icons-material/Close";
 import  {  ToastContainer, toast }from "react-toastify"
 import DeleteIcon from '@mui/icons-material/Delete';
 import 'react-toastify/dist/ReactToastify.css';
-const CreateProducts = ({ categoryname, data,open, close ,setImageDelUpdate,setisOpenPortalFeatured,isOpenPortalFeatured}) => {
+import Loader from "../Loader/Loader.jsx";
+import DotLoader from "../DotLoader/DotLoader.jsx";
+const CreateProducts = ({ categoryname,isShowCreate, setisShowCreate ,setImageDelUpdate,setisOpenPortalFeatured,isOpenPortalFeatured}) => {
   const [imagePreviews, setImagePreviews] = useState([]);
   const [Files, setFiles] = useState([]);
   
- 
-console.log(Files)
+ const [isLoading, setisLoading] = useState(false)
+
   const [productData, setproductData] = useState({
     productname: "",
     brandname: "",
@@ -64,12 +66,13 @@ if (filteredcategory && filteredcategory.length > 0) {
   };
 
   const AddProduct = async () => {
+    setisLoading(true)
     let formData = new FormData();
     for (let i = 0; i < Files.length; i++) {
       formData.append("images", Files[i].file);
       console.log(Files[i].file)
     }
-    console.log(formData)
+    
     formData.append("productname", productData.productname);
     formData.append("brandname", productData.brandname);
     formData.append("categoryname", productData.categoryname);
@@ -90,7 +93,7 @@ if (filteredcategory && filteredcategory.length > 0) {
           },
         }
       );
-    
+     
       if(res?.data?.success == true){
         if(!isOpenPortalFeatured){
            setImageDelUpdate((e)=>!e)
@@ -107,13 +110,14 @@ if (filteredcategory && filteredcategory.length > 0) {
           selling_price:""
         });
         toast.success(res.data.message)
-       
+        setisLoading(false)
       }
      
 
     } catch (error) {
       toast.error(error?.response?.data?.message)
       console.error("Error uploading product:", error);
+      setisLoading(false)
     }
 
     // Clean up image URLs
@@ -127,7 +131,7 @@ if (filteredcategory && filteredcategory.length > 0) {
     );
   };
 
-  if (!open&&!isOpenPortalFeatured) return null
+  if (!isShowCreate) return null
 
   return (
     <>
@@ -135,6 +139,9 @@ if (filteredcategory && filteredcategory.length > 0) {
   isOpenPortalFeatured&&(
     <div>
       <ToastContainer/>
+   
+
+ 
     </div>
   )
  }
@@ -144,15 +151,20 @@ if (filteredcategory && filteredcategory.length > 0) {
     {isOpenPortalFeatured?
      <span className=" w-full flex justify-end cursor-pointer " 
      onClick={()=>{
-      setisOpenPortalFeatured(false)
+      setisShowCreate(false)
      }}>
        <CloseIcon/></span>
     : <span className=" w-full flex justify-end cursor-pointer " 
-    onClick={close}>
+    onClick={()=>setisShowCreate(false)}>
       <CloseIcon/></span>}
           <div>
             <h1 className="font-bold">Upload Product</h1>
           </div>
+      <div>
+     {
+      isLoading? <Loader/>:""
+     }
+      </div>
           <div className="flex flex-col mt-3">
             <label>Product Name:</label>
             <input
@@ -169,6 +181,7 @@ if (filteredcategory && filteredcategory.length > 0) {
             <input
               onChange={handalProduct}
               name="brandname"
+              required
               value={productData.brandname}
               className="bg-gray-200 p-2 rounded-md outline-none"
               type="text"
@@ -176,8 +189,9 @@ if (filteredcategory && filteredcategory.length > 0) {
             />
           </div>
 
-
+        
           <div className="flex flex-col mt-3">
+         
             <label>Category Name:</label>
             <select
             name="categoryname"
@@ -310,7 +324,9 @@ if (filteredcategory && filteredcategory.length > 0) {
                 className="bg-blue-700 text-white px-5 py-2 text-lg font-semibold rounded-md"
                 onClick={AddProduct}
               >
-                Upload Product
+                {
+                  isLoading?<DotLoader/>:"Upload Product"
+                }
               </button>
             </div>
           </div>

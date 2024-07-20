@@ -1,16 +1,18 @@
 const jwt = require("jsonwebtoken");
+
 const Protected = (req, res, next) => {
   const headers = req.headers["authorization"];
+  console.log(headers);
 
   if (headers) {
     const token = headers;
 
     if (token) {
-      jwt.verify(token, process.env.JWT_KEY, function (err, decoded) {
+      jwt.verify(token, "AHsa@123", function (err, decoded) {
         if (decoded) {
           req.id = decoded.userId;
         } else if (err) {
-          console.log("not eoufn");
+          console.log("eror while matching token", err);
         }
       });
     }

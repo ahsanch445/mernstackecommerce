@@ -1,13 +1,16 @@
 var express = require("express");
 var router = express.Router();
 
-const {
-  getAllItems,
+var {
+  getAllYourModels,
   updatePaymentStatus,
   deleteItem,
-} = require("../Controller/AdminOrders");
+  allMyOrders,
+} = require("../Controller/Orders");
 
-router.get("/admin", getAllItems);
+router.get("/admin", getAllYourModels);
 router.post("/admin/update", updatePaymentStatus);
 router.post("/admin/delete", deleteItem);
+router.post("/myorders", allMyOrders);
+
 module.exports = router;

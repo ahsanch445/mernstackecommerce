@@ -8,9 +8,10 @@ const ToastMessage = ({children})=>{
 const [userLogout, setuserLogout] = useState(null)
 const [ForceUpdate, setForceUpdate] = useState("")
 const [toggle, settoggle] = useState(null)
-
+const [toggleReview, settoggleReview] = useState(false)
+const [search, setsearch] = useState("")
 return(
-    <toastContext.Provider value={{userLogout, toggle, settoggle, setuserLogout,ForceUpdate, setForceUpdate,}}>
+    <toastContext.Provider value={{ search, setsearch, toggleReview, settoggleReview, settoggle, setuserLogout,ForceUpdate, setForceUpdate}}>
 
     {children}
 </toastContext.Provider>

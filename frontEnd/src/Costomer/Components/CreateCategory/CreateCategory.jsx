@@ -4,13 +4,15 @@ import React, { useEffect, useState } from "react";
 import CloseIcon from '@material-ui/icons/Close';
 import CreateProducts from "../CreateProduct/CreateProducts";
 import { ToastContainer, toast } from "react-toastify";
+import Loader from "../Loader/Loader";
+import DotLoader from "../DotLoader/DotLoader";
 const CreateCategory = ({ isPortalOpen, setisPortalOpen }) => {
   if (!isPortalOpen) return null;
   const [Categoryname, setCategoryname] = useState("");
 const [successMessage, setsuccessMessage] = useState(null)
   
 const [isOpenPortalFeatured, setisOpenPortalFeatured] = useState(false)
- 
+ const [isLoading, setisLoading] = useState(false)
   const [section, setsection] = useState({
     sectionname: "",
     itemsname: "",
@@ -36,22 +38,25 @@ const [isOpenPortalFeatured, setisOpenPortalFeatured] = useState(false)
   };
 
   const handalCilckCategory = async () => {
+    setisLoading(true)
     try {
       let res = await axios.post("http://localhost:3000/categories/create", {
         section,
         Categoryname,
       });
       
-     setsuccessMessage(res.data.message)
+    toast.success(res?.data?.message)
      setCategoryname("")
      setsection({
       sectionname:"",
       itemsname:""
      })
+     setisLoading(false)
     } catch (error) {
     
       console.error(error);
       setsuccessMessage(error?.response?.data?.message)
+      setisLoading(false)
     }
   };
   const handleFeaturedProduct = ()=>{
@@ -60,7 +65,7 @@ const [isOpenPortalFeatured, setisOpenPortalFeatured] = useState(false)
 
   return (
     <>
-    
+    <ToastContainer/> 
       <div className="flex justify-center items-center fixed z-40 left-[35vw] top-16">
         <div className="w-[450px] h-[100vh] bg-[#ffff] overflow-y-scroll p-5">
         {
@@ -77,6 +82,13 @@ const [isOpenPortalFeatured, setisOpenPortalFeatured] = useState(false)
           </span>
           <div>
             <h1 className="font-bold">Create Category</h1>
+          </div>
+          <div>
+            {
+              isLoading?<>
+              <Loader/>
+              </>:""
+            }
           </div>
           <div className="flex flex-col mt-3">
             <label>Category Name:</label>
@@ -127,7 +139,9 @@ const [isOpenPortalFeatured, setisOpenPortalFeatured] = useState(false)
                 className="bg-blue-700 text-white px-5 py-2 w-2/3 text-lg font-semibold rounded-md"
                 //  onClick={AddProduct}
               >
-              Create Category 
+             {
+              isLoading?<DotLoader/>:"Create Category"
+             }
               </button>
             
             </div>

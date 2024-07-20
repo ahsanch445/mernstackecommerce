@@ -9,6 +9,7 @@ var {
   GetProductAndUpdate,
   deleteImages,
   UserReviews,
+  fetchingReviews,
 } = require("../Controller/Product");
 const Protected = require("../MiddleWares/Protected");
 const ProductDataModel = require("../Models/ProductData-Model");
@@ -21,6 +22,8 @@ router.post("/create", Protected, upload.array("images", 10), createProduct);
 // router.put("/ratting/:id", UserReviews);
 router.post("/delete/:id", GetProductAndDelete);
 router.post("/delete", deleteImages);
+router.post("/reviews/:id", UserReviews);
+router.post("/getreview/:id", fetchingReviews);
 
 router.get("/products", async (req, res) => {
   try {

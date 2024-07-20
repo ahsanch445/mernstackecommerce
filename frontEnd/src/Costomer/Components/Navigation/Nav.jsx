@@ -12,6 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Cookies from "js-cookie";
 import OrderNav from '../NavCartDetails/OrderNav';
 import { useSelector } from 'react-redux';
+import { teal } from '@mui/material/colors';
 const navigation = {
   categories: [
     {
@@ -141,8 +142,14 @@ function classNames(...classes) {
 }
 
 function Navigation() {
+  let { setsearch}= useContext(toastContext)
+
   let Cart = useSelector((state)=> state.addToCart.addToCart)
-  console.log("Cart",Cart.length)
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen((prev)=>!prev);
+  };
   let { setuserLogout } = useContext(toastContext);
 let navigate = useNavigate()
   const [anchorEl, setAnchorEl] = useState(null);
@@ -174,7 +181,11 @@ const userProfile = () => {
   }
 };
 
-let user = localStorage.getItem("user");
+let user1 = localStorage.getItem("user");
+let user = Cookies.get("token");
+let jsonData = JSON.parse(user1)
+console.log(jsonData)
+
 const handalClickTwo = () => {
   handleClose();
   userProfile();
@@ -310,20 +321,26 @@ const handalMyOrderClick = () => {
 
                 <div className="space-y-6 border-t border-gray-200 px-4 py-6">
                {
-                user
+                jsonData||user
                 
                 
                 ? 
                 
   <>
 <div className='flex flex-col items-start gap-5 font-semibold'>
-<button onClick={handalClickTwo}>
-My Profile
-
+{
+  jsonData?.roll=="ADMIN"?<>
+  <button onClick={handalClickTwo}>Admin Profile</button>
+  <button onClick={(()=>{
+    navigate("/admin/orders/")
+  })}>
+                Orders
                 </button>
-                <button onClick={handalMyOrderClick}>
+  </>: <button onClick={handalMyOrderClick}>
                   My Order
                 </button>
+}
+               
 
                 <button onClick={handalLogout}>Logout</button>
 </div>
@@ -496,7 +513,7 @@ My Profile
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-               {user?
+               {jsonData||user?
                <>
                 <Avatar
 
@@ -570,15 +587,32 @@ N
               }}
             >
               <div className="w-fit">
-                <MenuItem onClick={handalClickTwo}>Profile</MenuItem>
+              {
+                jsonData?.roll=="ADMIN"?
+                <>
+                <MenuItem onClick={(()=>{
+                  handalClickTwo()
+                })}>
+                Admin Profile</MenuItem>
                 <MenuItem
                   onClick={() => {
                     handleClose();
-                    handalMyOrderClick();
+                    navigate("/admin/orders/");
                   }}
                 >
-                  My Order
+                Orders
                 </MenuItem>
+                </>
+                :    <MenuItem
+                onClick={() => {
+                  handleClose();
+                  handalMyOrderClick();
+                }}
+              >
+                My Order
+              </MenuItem>
+              }
+              
                 <MenuItem
                   onClick={() => {
                     handleClose();
@@ -605,12 +639,27 @@ N
                 </div> */}
 
                 {/* Search */}
-                <div className="flex lg:ml-6">
-                  <a href="#" className="p-2 text-gray-400 hover:text-gray-500">
-                    <span className="sr-only">Search</span>
-                    <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
-                  </a>
-                </div>
+                <div className="flex lg:ml-6 relative">
+      <a  className="p-2 cursor-pointer text-gray-400 hover:text-gray-500" onClick={toggleDropdown}>
+        <span className="sr-only">Search</span>
+        <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
+      </a>
+      {
+        isOpen?<>
+        <div
+        className={`absolute mt-2 w-64 top-12 right-0 z-10  rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition ease-out duration-300 `}>
+        <div className="p-4">
+          <input
+          onChange={((e)=>setsearch(e.target.value))}
+            type="text"
+            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            placeholder="Search..."
+          />
+        </div>
+      </div>
+        </>:""
+      }
+    </div>
 
                 {/* Cart */}
                 <div className={`ml-4 flow-root lg:ml-6 ${Cart?.length<=0?" pointer-events-none":""}`}>

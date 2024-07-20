@@ -39,7 +39,8 @@ setRegister({
     setisLoading(true)
     try {
       let res = await axios.post("http://localhost:3000/auth/register",Register)
-  if(res.data){
+      console.log(res)
+  if(res?.data){
     toast.success(res.data.message)
   console.log(res.data)
     setisLoading(false)
@@ -58,21 +59,22 @@ setRegister({
      
    
       
-      toast.error(error.response.data.message)
-      console.error(error.response.data.message)
+      toast.error(error?.response?.data?.message)
+      console.error(error)
     }
   }
 
   
   return (
     <>
+   <ToastContainer/>
+    <div className='flex justify-center items-center 
    
-    <div className='flex justify-center items-center h-screen
 fixed  w-full'>
-    <div className="login-container lg:w-3/4   ">
+    <div className="login-container lg:w-3/4   h-screen  ">
      <form  onSubmit={onSubmit} style={{boxShadow: "  rgba(99, 99, 99, 0.2) 0px 2px 8px 0px"}} className="login-form  py-3  px-16  rounded-md shadow-md  bg-[#ffff] lg:gap-1">
        <h1 className='text-7xl lg:text-5xl'>Welcome</h1>
-       <p className='text-3xl lg:text-sm mt-5 mb-10'>Please login to your account</p>
+       <p className='text-3xl lg:text-sm mt-2 mb-2'>Please login to your account</p>
        <div className="input-group pb-8 lg:pb-0">
          <input onChange={handalRegister} className='p-7 lg:p-1 text-4xl lg:text-xl w-[550px] lg:w-56' type="text" id="username" name="fullname" placeholder="FullName" required />
        </div>

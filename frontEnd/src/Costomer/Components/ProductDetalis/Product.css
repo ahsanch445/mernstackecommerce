@@ -127,25 +127,38 @@ header {
     background:#0652DD;
   }
   
-  .addtocart{
-    display:flex;
-  
-    border-radius:100px;
-    border:none;
-   justify-content: center;
-   align-items: center;
-    position:relative;
-    background:#0652DD;
-    cursor:pointer;
- height: 4vw;
- width: 17vw;
-    overflow:hidden;
-    transition:transform 0.1s;
-    z-index:1;
-  }
-  .addtocart:hover{
-    transform:scale(1.1);
-  }
+.addtocart {
+    display: flex;
+    border-radius: 100px;
+    border: none;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background: #0652DD;
+    cursor: pointer;
+    height: 4vw;
+    width: 17vw;
+    overflow: hidden;
+    transition: transform 0.4s ease;
+    z-index: 1;
+    font-size: 17px;
+}
+
+.addtocart:hover {
+    transform: scale(1.1);
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
   .pretext{
     color:#fff;
     background:#0652DD;

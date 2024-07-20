@@ -3,7 +3,7 @@ import StripePaymentForm from '../Stripe/Stripe'
 import { useSelector } from 'react-redux'
 const DeliveryAddressdata = ({OrderSummary,hide,AddressData}) => {
  
-  let Cart = useSelector((state)=>state?.addToCart?.addToCart)
+
   
   return (
     <div>
@@ -17,7 +17,7 @@ const DeliveryAddressdata = ({OrderSummary,hide,AddressData}) => {
 <h1 className='font-semibold tracking-tight mt-1'>{AddressData.showData?AddressData?.Zip:"61200"}</h1>
     <p className='font-medium opacity-85  text-[15px]'>{AddressData.showData?AddressData?.PhoneNumber:"030000000000"}</p>
     {!hide||OrderSummary?<button className='bg-[#3c47d8] p-2 mt-3 text-sm rounded text-[white] '>
-      <StripePaymentForm AddressData={AddressData}  Cart= { Cart}/>
+      <StripePaymentForm AddressData={AddressData}  />
 
       
       </button>:""}

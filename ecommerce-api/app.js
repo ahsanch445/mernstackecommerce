@@ -1,7 +1,7 @@
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
-
+var webhook = require("./Controller/Webhooks");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 require("dotenv").config();
@@ -16,7 +16,7 @@ var app = express();
 const session = require("express-session");
 var cors = require("cors");
 const passport = require("passport");
-
+var bodyParse = require("body-parser");
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -37,12 +37,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
+app.use(bodyParse.json());
 app.use("/auth", auth);
 app.use("/users", users);
 app.use("/order", Order);
 app.use("/product", product);
 app.use("/categories", categories);
 app.use("/stripe", Stripe);
+app.use("/api", webhook);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
