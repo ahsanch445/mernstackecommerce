@@ -11,7 +11,7 @@ const OrderDetail = () => {
   const [myorders, setmyorders] = useState([])
   const [selectedStatus, setSelectedStatus] = useState('');
   let userId = JSON.parse(localStorage.getItem("user"))
-  console.log(userId)
+  
   let filterData = myorders.filter((elem)=>{
     return elem.deliveryStatus.includes(selectedStatus)
   })
