@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import './Product.css';
 import Rating from '@mui/material/Rating';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import CloseIcon from '@mui/icons-material/Close';
 import { Grid } from '@mui/material';
 import Ratting from '../RattingCard/Ratting';
 import { useLocation, useNavigate } from 'react-router-dom';

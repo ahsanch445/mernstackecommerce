@@ -1,7 +1,7 @@
 
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import CloseIcon from '@material-ui/icons/Close';
+import CloseIcon from '@mui/icons-material/Close';
 import CreateProducts from "../CreateProduct/CreateProducts";
 import { ToastContainer, toast } from "react-toastify";
 import Loader from "../Loader/Loader";
