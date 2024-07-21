@@ -17,7 +17,7 @@ useEffect(() => {
  const getUser = async () => {
 
   try {
-    const res = await axios.get("http://localhost:3000/users/profile",{
+    const res = await axios.get("https://frontend-eight-zeta-18.vercel.app/users/profile",{
       headers:{
         Authorization:`${token}`
       }
