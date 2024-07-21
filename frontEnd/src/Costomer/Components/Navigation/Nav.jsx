@@ -164,7 +164,7 @@ let navigate = useNavigate()
 // console.log(categoryData[0].name)
   const [open, setOpen] = useState(false)
   const fetchApisDataForCategory =async ()=>{
-let res = await axios.get("http://localhost:3000/categories/nav/all")
+let res = await axios.get("https://ecommerce-api-one-iota.vercel.app/categories/nav/all")
 
 setcategoryData(res?.data?.category)
   }

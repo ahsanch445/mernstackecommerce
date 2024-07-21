@@ -43,7 +43,7 @@ let data = filterData[0]
   const handalCilckCategory = async () => {
     setisLoading(true)
     try {
-      let res = await axios.post("http://localhost:3000/categories/addnew2", 
+      let res = await axios.post("https://ecommerce-api-one-iota.vercel.app/categories/addnew2", 
         section,
         
       );

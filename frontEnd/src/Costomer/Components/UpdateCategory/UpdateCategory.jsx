@@ -64,7 +64,7 @@ const [isLoading, setisLoading] = useState(false)
   const UpdateCategory = async()=>{
     setisLoading(true)
 try {
-  let res = await axios.post("http://localhost:3000/categories/update",{id:CateData?._id,categoryName:selectedData?.categoryName,sections:changeSection,items:itemsData})
+  let res = await axios.post("https://ecommerce-api-one-iota.vercel.app/categories/update",{id:CateData?._id,categoryName:selectedData?.categoryName,sections:changeSection,items:itemsData})
  
  
 setshowMessage(res?.data?.message)

@@ -108,7 +108,7 @@ return elem.name
 
       try {
         let res = await axios.post(
-          "http://localhost:3000/product/delete",
+          "https://ecommerce-api-one-iota.vercel.app/product/delete",
           {
             
             id:product._id,
@@ -147,7 +147,7 @@ return elem.name
 
     try {
       let res = await axios.post(
-        `http://localhost:3000/product/update/${product._id}`,
+        `https://ecommerce-api-one-iota.vercel.app/product/update/${product._id}`,
         formData,
         {
           headers: {

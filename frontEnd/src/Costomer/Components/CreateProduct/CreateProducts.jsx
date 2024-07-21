@@ -85,7 +85,7 @@ if (filteredcategory && filteredcategory.length > 0) {
 
     try {
       let res = await axios.post(
-        "http://localhost:3000/product/create",
+        "https://ecommerce-api-one-iota.vercel.app/product/create",
         formData,
         {
           headers: {

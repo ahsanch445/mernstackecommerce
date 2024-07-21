@@ -53,7 +53,7 @@ const RegisterAuthencation = async (req, res) => {
       });
       await token.save();
 
-      const verificationLink = `http://localhost:5173/auth/verifiy/${token.token}`;
+      const verificationLink = `https://frontend-eight-zeta-18.vercel.app/auth/verifiy/${token.token}`;
       await sendVerificationEmail(email, verificationLink);
 
       return res

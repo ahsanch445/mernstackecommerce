@@ -23,7 +23,7 @@ const [UpdatePortal, setUpdatePortal] = useState(false)
 
   const getAllProducts = async () => {
     try {
-      let res = await axios.get("http://localhost:3000/product/all");
+      let res = await axios.get("https://ecommerce-api-one-iota.vercel.app/product/all");
       setallProducts(res.data.allProducts);
     } catch (error) {
       console.error(error.message);
@@ -68,7 +68,7 @@ const [UpdatePortal, setUpdatePortal] = useState(false)
     
    
     try {
-     const res =  await axios.post(`http://localhost:3000/product/delete/${product?._id}`)
+     const res =  await axios.post(`https://ecommerce-api-one-iota.vercel.app/product/delete/${product?._id}`)
      setImageDelUpdate((e)=>!e)
    console.log(res.data.message)
   toast.success(res?.data?.message)
@@ -81,7 +81,7 @@ const [UpdatePortal, setUpdatePortal] = useState(false)
 
    //show CategoryName
    const showAllCategoryName = async()=>{
-let res = await axios.get("http://localhost:3000/categories/nav/all")
+let res = await axios.get("https://ecommerce-api-one-iota.vercel.app/categories/nav/all")
 
 setCategoryName(res?.data?.category)
    }

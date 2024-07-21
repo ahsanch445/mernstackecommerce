@@ -28,7 +28,7 @@ const [profileUser, setprofileUser] = useState()
 
   const fetchAllUsers = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/users/alluser");
+      const response = await axios.get("https://ecommerce-api-one-iota.vercel.app/users/alluser");
       setAllUser(response.data);
     } catch (error) {
       console.error("Error fetching users:", error);
@@ -74,7 +74,7 @@ const [profileUser, setprofileUser] = useState()
   };
   const handalRole = async()=>{
    try {
-    const res = await axios.put("http://localhost:3000/users/updaterole",checkRole)
+    const res = await axios.put("https://ecommerce-api-one-iota.vercel.app/users/updaterole",checkRole)
   if(res.data.message){
     setupdateUser(!updateUser)
 toast.success(res.data.message)
@@ -91,7 +91,7 @@ toast.success(res.data.message)
   
    
     try {
-      const data = await axios.get("http://localhost:3000/users/profile",{
+      const data = await axios.get("https://ecommerce-api-one-iota.vercel.app/users/profile",{
         headers:{
           Authorization:`${token}`
         }

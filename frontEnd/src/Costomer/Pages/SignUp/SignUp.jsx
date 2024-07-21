@@ -38,7 +38,7 @@ setRegister({
     e.preventDefault()
     setisLoading(true)
     try {
-      let res = await axios.post("http://localhost:3000/auth/register",Register)
+      let res = await axios.post("https://ecommerce-api-one-iota.vercel.app/auth/register",Register)
       console.log(res)
   if(res?.data){
     toast.success(res.data.message)

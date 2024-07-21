@@ -29,7 +29,7 @@ const fetchApisDataForCategory =async ()=>{
   
     }
     const  getUpdateCategory = (Id)=>{
-      axios.put(`http://localhost:3000/categories/getcategory/${Id}`).then((res)=>{
+      axios.put(`https://ecommerce-api-one-iota.vercel.app/categories/getcategory/${Id}`).then((res)=>{
         setCateData(res
             .data.category
 
@@ -39,14 +39,14 @@ const fetchApisDataForCategory =async ()=>{
      })}
   
     const fetchApisDataCategory =async ()=>{
-      let res = await axios.get("http://localhost:3000/categories/allcategories")
+      let res = await axios.get("https://ecommerce-api-one-iota.vercel.app/categories/allcategories")
       setallCategory(res.data.category)
     }
 
     const handleDeleteCategory = async (id) => {
 try {
   
- let res =  await axios.delete(`http://localhost:3000/categories/delete/${id}`)
+ let res =  await axios.delete(`https://ecommerce-api-one-iota.vercel.app/categories/delete/${id}`)
  console.log(res.data)
  setisPortalOpenUpdate((prev)=>!prev)
 } catch (error) {

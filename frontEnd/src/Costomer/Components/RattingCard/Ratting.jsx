@@ -28,7 +28,7 @@ const Ratting = ({ userRatting,sethandleRatting,product}) => {
   
   
     try {
-      const response = await axios.get(`http://localhost:3000/product/products`);
+      const response = await axios.get(`https://ecommerce-api-one-iota.vercel.app/product/products`);
       setCateProduct(response.data)
    
     } catch (error) {

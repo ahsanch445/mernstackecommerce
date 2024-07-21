@@ -8,7 +8,7 @@ const ShowCategory = () => {
   useEffect(() => {
     const handalCategories = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/categories/all");
+        const res = await axios.get("https://ecommerce-api-one-iota.vercel.app/categories/all");
         setallCategories(res.data.category);
       } catch (error) {
         console.error(error);

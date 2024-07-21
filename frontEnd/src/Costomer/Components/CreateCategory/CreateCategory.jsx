@@ -40,7 +40,7 @@ const [isOpenPortalFeatured, setisOpenPortalFeatured] = useState(false)
   const handalCilckCategory = async () => {
     setisLoading(true)
     try {
-      let res = await axios.post("http://localhost:3000/categories/create", {
+      let res = await axios.post("https://ecommerce-api-one-iota.vercel.app/categories/create", {
         section,
         Categoryname,
       });

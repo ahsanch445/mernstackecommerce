@@ -34,7 +34,7 @@ const [handleRatting, sethandleRatting] = useState(false);
     setLoading(true);
     try {
       const response = await axios.post(
-        `http://localhost:3000/product/getreview/${product._id}`,
+        `https://ecommerce-api-one-iota.vercel.app/product/getreview/${product._id}`,
         { page, limit: 10 }
       );
       if (response.data.ratting.length > 0) {

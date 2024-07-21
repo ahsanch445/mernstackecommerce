@@ -16,7 +16,7 @@ const Categorypage = () => {
     
     try {
       let response = await axios.post(
-        `http://localhost:3000/product/${params.categoryname}/${params.sectionname}/${params.itemsname}`
+        `https://ecommerce-api-one-iota.vercel.app/product/${params.categoryname}/${params.sectionname}/${params.itemsname}`
       );
       setshowCat(response?.data?.product);
     } catch (error) {

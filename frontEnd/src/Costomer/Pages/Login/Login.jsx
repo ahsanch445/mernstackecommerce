@@ -49,7 +49,7 @@ const Login = () => {
   const onSubmit =async (e)=>{
 e.preventDefault()
 try {
-  let res = await axios.post("http://localhost:3000/auth/login",LoginForm)
+  let res = await axios.post("https://ecommerce-api-one-iota.vercel.app/auth/login",LoginForm)
   toast.success(res.data.message)
   
   if(res.data.token){

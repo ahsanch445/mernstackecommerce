@@ -25,7 +25,7 @@ const OrderDetail = () => {
   }
   const handleRatting =async(rattng,reviews)=>{
     try {
-      let res =  await axios.post(`http://localhost:3000/product/reviews/${productId}`,{rattng,reviews,userId:userId._id})
+      let res =  await axios.post(`https://ecommerce-api-one-iota.vercel.app/product/reviews/${productId}`,{rattng,reviews,userId:userId._id})
       
       if(res.data){
         settoggleReview((prev)=>!prev)
@@ -35,7 +35,7 @@ const OrderDetail = () => {
     }
   }
   const myOrder =async()=>{
-    let allData = await axios.post("http://localhost:3000/order/myorders",{userId:userId._id} )
+    let allData = await axios.post("https://ecommerce-api-one-iota.vercel.app/order/myorders",{userId:userId._id} )
    
     setmyorders(allData.data)
   }

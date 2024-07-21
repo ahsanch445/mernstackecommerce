@@ -14,7 +14,7 @@ const  Verification = () => {
     useEffect(() => {
         const verifyEmail = async () => {
           try {
-            const response = await axios.get(`http://localhost:3000/auth/verifiy/${id}`);
+            const response = await axios.get(`https://ecommerce-api-one-iota.vercel.app/auth/verifiy/${id}`);
             console.log(response.data)
            if(
             response.data

@@ -12,7 +12,7 @@ console.log("user",user)
   const handleStripe = async () => {
     try {
       const stripe = await stripePromise;
-      const res = await axios.post('http://localhost:3000/stripe/create-checkout-session', {myData, AddressData,userId: user?._id,Cart });
+      const res = await axios.post('https://ecommerce-api-one-iota.vercel.app/stripe/create-checkout-session', {myData, AddressData,userId: user?._id,Cart });
       console.log(res)
       const { url } = res.data;
      if(url){

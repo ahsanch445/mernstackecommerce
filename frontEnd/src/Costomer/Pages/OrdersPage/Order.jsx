@@ -19,7 +19,7 @@ const Order = () => {
       let elem = event.target.value
      
      try {
-      let res = await axios.post("http://localhost:3000/order/admin/update",{
+      let res = await axios.post("https://ecommerce-api-one-iota.vercel.app/order/admin/update",{
         paymentStatus:elem ,
         Id:Id,
         
@@ -33,7 +33,7 @@ const Order = () => {
     };
   const handleDel = async(elemId)=>{
 try {
-  let data = axios.post("http://localhost:3000/order/admin/delete",{id:elemId})
+  let data = axios.post("https://ecommerce-api-one-iota.vercel.app/sorder/admin/delete",{id:elemId})
   if(data.res){
     settoggle(data.res);
   }
@@ -44,7 +44,7 @@ try {
     let  getAdminData = async()=>{
      
         try {
-            let res = await axios.get("http://localhost:3000/order/admin")
+            let res = await axios.get("https://ecommerce-api-one-iota.vercel.app/order/admin")
         
             setOrderDetails(res?.data)
         } catch (error) {
