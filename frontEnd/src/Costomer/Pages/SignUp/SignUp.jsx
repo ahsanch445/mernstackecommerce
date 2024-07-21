@@ -6,7 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
 import   {toastContext}  from '../../../Context-Api/Context';
-import Outh from '../../Components/Googleouth/Outh';
+// import Outh from '../../Components/Googleouth/Outh';
 const SignUp = () => {
  const [isLoading, setisLoading] = useState(false)
   let navigate = useNavigate()
@@ -90,7 +90,7 @@ fixed  w-full'>
        <button  className={`bg-[#007bff] butto p-7 lg:p-1 text-4xl lg:text-xl pb-8 lg:pb-1 ${isLoading?"pointer-events-none":""}`} type="submit">{isLoading?"Loading...":"Register"}</button>
        <div className="bottom-text">
          <p className='text-4xl mt-0 lg:text-lg'>Already Have a Account <Link to="/login">Login</Link></p>
-         <Outh/>
+         {/* <Outh/> */}
        </div>
      </form>
    

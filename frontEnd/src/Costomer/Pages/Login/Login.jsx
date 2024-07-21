@@ -6,7 +6,7 @@ import cookies from "js-cookie"
 import {  ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toastContext } from "../../../Context-Api/Context";
-import Outh from "../../Components/Googleouth/Outh";
+// import Outh from "../../Components/Googleouth/Outh";
 
 const Login = () => {
   let navigate = useNavigate()
@@ -114,7 +114,7 @@ try {
              
             </div>
            <div className=" flex justify-center mt-3">
-           <Outh/>
+           {/* <Outh/> */}
            </div>
           </form>
         
