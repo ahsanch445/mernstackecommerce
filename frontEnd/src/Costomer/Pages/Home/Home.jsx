@@ -46,7 +46,7 @@ useEffect(() => {
 useEffect(() => {
 (async function (){
 let data = await CategoryData()
-setCategory(data.category)
+setCategory(data?.category)
 })()
 }, [])
 
