@@ -57,7 +57,7 @@ const handleStripe = async (req, res) => {
       ],
       line_items: line_items,
       mode: "payment",
-      success_url: `http://localhost:5173/account/myorder`, // Pass order ID to success URL
+      success_url: `https://frontend-eight-zeta-18.vercel.app/account/myorder`, // Pass order ID to success URL
       cancel_url: "http://localhost:3000/check/fail",
       metadata: {
         userId: req.body.userId,
