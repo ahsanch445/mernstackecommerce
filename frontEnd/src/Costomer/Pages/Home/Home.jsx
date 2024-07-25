@@ -12,12 +12,12 @@ const Home = () => {
 let {userRegister,setuserRegister} = useContext(toastContext)
 const [Category, setCategory] = useState([])
 let token = Cookies.get("token")
-
+console.log(token)
 useEffect(() => {
  const getUser = async () => {
 
   try {
-    const res = await axios.get("https://frontend-eight-zeta-18.vercel.app/users/profile",{
+    const res = await axios.get("http://localhost:3000/users/profile",{
       headers:{
         Authorization:`${token}`
       }
