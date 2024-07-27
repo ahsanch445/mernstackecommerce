@@ -46,7 +46,7 @@ const Ratting = ({ userRatting,sethandleRatting,product}) => {
     <>
     
     <div className='  flex '>
-    <div className='w-1/2'>
+    <div className='w-1/2 '>
 
     {userRatting?.map((e,index)=><UserRatting key={index+1} data={e}/>)}
  {

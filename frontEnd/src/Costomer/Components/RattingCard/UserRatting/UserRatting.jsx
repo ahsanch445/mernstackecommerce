@@ -6,9 +6,9 @@ const UserRatting = ({data}) => {
   return (
     <div >
         <br />
-        <hr />
+        <hr className='mb-3' />
 
-    <Grid    container spacing={7}>
+    <Grid className=''    container spacing={7}>
 <Grid item xs={1}>
 <Box className='mt-2'>
     <Avatar className='text-white  ' sx={{width:44,height:44,bgcolor:'#9155fd'}}>

@@ -28,18 +28,18 @@ const handalproductdetails =()=>{
       {
         <div className="p-2   flex justify-center items-center ">
           <div className="flex gap-6">
-            <div className="md:w-[300px] md:h-[450px] w-52 p-1 rounded-md cursor-pointer shadow-xl bg-white">
+            <div className="w-[300px] h-[450px] lg:h-96 lg:w-52 p-1 rounded-md cursor-pointer shadow-xl bg-white">
               <div onClick={() => {
                 handalproductdetails()
                 handalAddToCart(data)
               }}>
                 <img
-                  className="md:h-72 h-48 object-top object-cover w-full mix-blend-multiply transform transition-all duration-300 hover:scale-105 rounded-md group-hover:-translate-y-2"
+                  className="md:h-72 lg:h-48 object-top object-cover w-full mix-blend-multiply transform transition-all duration-300 hover:scale-105 rounded-md group-hover:-translate-y-2"
                   src={data?.productimage[0]}
                   alt=""
                   srcset=""
                 />
-                <h1 className=" px-1 md:mt-2 md:text-xl  font-bold text-lg">{data?.productname}</h1>
+                <h1 className=" px-1 md:mt-2 md:text-xl  font-bold lg:text-lg">{data?.productname}</h1>
                 <hr />
                 <div className=" px-1 flex justify-between items-center mt-2 mb-2">
                   <h1 className="font-medium text-lg">Rs {data?.selling_price}</h1>

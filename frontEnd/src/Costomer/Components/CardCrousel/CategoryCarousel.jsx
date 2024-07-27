@@ -23,7 +23,7 @@ let filterCateProduct = product.filter((data)=>{
 })
 let data = filterCateProduct.filter((item) => item?.productname.toLowerCase().includes(search?.toLowerCase()));
 
-console.log(data)
+
 const sendDataToBackend = async () => {
   
   
@@ -70,14 +70,14 @@ const sendDataToBackend = async () => {
   const CustomNextButton = ({ onClick }) => (
    <>
    
-    <button onClick={onClick} className="md:hidden absolute bg-white shadow-2xl right-[0px] z-10 custom-next-button">
+    <button onClick={onClick} className="lg:block hidden top-[40%]  absolute bg-white shadow-2xl right-[0px] z-10 custom-next-button">
       <ArrowForwardIosIcon />
     </button>
    </>
   );
 
   const CustomPrevButton = ({ onClick }) => (
-    <button onClick={onClick} className=" md:hidden absolute     left-0  bg-white shadow-2xl  mr-10 z-20 custom-next-button">
+    <button onClick={onClick} className="lg:block hidden absolute top-[40%]      left-0  bg-white shadow-2xl  mr-10 z-20 custom-next-button">
       <ArrowBackIosIcon />
     </button>
   );

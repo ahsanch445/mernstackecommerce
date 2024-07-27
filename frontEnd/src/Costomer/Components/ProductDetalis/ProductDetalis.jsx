@@ -118,10 +118,10 @@ const [handleRatting, sethandleRatting] = useState(false);
     <div>
       <section id="product-info">
         <div className="item-image-parent">
-          <div className="item-list-vertical">
+          <div className="item-list-vertical w-28 lg:w-12 ">
             {product?.productimage?.map((image, index) => (
-              <div className="thumb-box" key={index}>
-                <img
+              <div className="thumb-box   " key={index}>
+                <img 
                   onClick={() => handalImageClik(image)}
                   src={image}
                   alt="thumbnail"
@@ -137,7 +137,7 @@ const [handleRatting, sethandleRatting] = useState(false);
                   ref={imgRef}
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}
-                  className="cursor-pointer max-h-[340px] rounded-md object-top max-w-64"
+                  className="cursor-pointer max-w-72 max-h-[600px] lg:max-h-[340px] rounded-md object-top lg:max-w-64"
                   src={product?.productimage[0]}
                   alt="default"
                 />
@@ -147,7 +147,7 @@ const [handleRatting, sethandleRatting] = useState(false);
                   onMouseMove={handleMouseMove}
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}
-                  className=" max-h-[340px] rounded-md  object-top object-fit cursor-pointer max-w-64"
+                  className=" max-h-[600px] lg:max-h-[340px] rounded-md  object-top object-fit cursor-pointer max-w-72 lg:max-w-64"
                   src={imgUrl}
                   alt="default"
                 />
@@ -171,27 +171,27 @@ const [handleRatting, sethandleRatting] = useState(false);
         </div>
         <div className="item-info-parent">
           <div className="main-info mt-3">
-            <h4>{product?.productname}</h4>
-            <div className="star-rating">
+            <h4 className='text-[30px] lg:text-[21px] '>{product?.productname}</h4>
+            <div className="star-rating  lg:0   mt-2">
               <Rating
                 precision={0.5}
-                style={{ fontSize: '20px' }}
+                
                 readOnly
-                className="h-fit leading-none"
+                className="h-fit leading-none alo "
                 name="haif-rating"
                 value={product?.ratting}
               />
             </div>
-            <p style={{ fontSize: '19px' }}>
+            <p className='alo' >
               Price: <span id="price">Rs{product?.selling_price}</span>{' '}
               <span className="line-through" id="price1">
                 {product?.price}
               </span>{' '}
             </p>
-            <p>
+            <p className='alo'> 
               Discount : {Math.floor(product?.discountParacentage)}%
             </p>
-            <p>Brand name: {product?.brandname}</p>
+            <p className='alo'>Brand name: {product?.brandname}</p>
           </div>
           <div className="select-items">
             <div className="change-color flex">
@@ -203,7 +203,7 @@ const [handleRatting, sethandleRatting] = useState(false);
                   <br />
                   <select
                     onChange={handleSize}
-                    className="bg-gray-200"
+                    className="bg-gray-200 w-20 h-10 lg:w-16 lg:h-8 text-xl lg:text-base"
                     value={isSize}
                   >
                     {product?.Size?.map((elem, index) => (
@@ -212,7 +212,7 @@ const [handleRatting, sethandleRatting] = useState(false);
                   </select>
                 </div>
               </div>
-              <div className="flex justify-center items-center ml-24">
+              <div className="flex justify-center items-center ml-32 ">
                 <button
                   onClick={() => {
                     navigate(`/Checkout/${5}`, {
@@ -222,7 +222,7 @@ const [handleRatting, sethandleRatting] = useState(false);
                       setAddToCart({ isProductDetails: true, product, isSize })
                     );
                   }}
-                  className="addtocart"
+                  className="addtocart p-5 lg:p-2 w-52 lg:w-40"
                 >
                   <div className="pretext gap-2">
                     <AddShoppingCartIcon /> <p>Add To Cart</p>
@@ -234,10 +234,10 @@ const [handleRatting, sethandleRatting] = useState(false);
               style={{ userSelect: 'none' }}
               className="flex items-center gap-2"
             >
-              <h1 className="text-gray-700">Quantity:</h1>
+              <h1 className="text-gray-700 text-2xl lg:text-lg ">Quantity:</h1>
               <h1
                 onClick={() => handleCartQtn(product._id, orderQtn - 1)}
-                className="px-2 cursor-pointer max-h-7 flex justify-center items-center max-w-7 text-xl font-bold bg-gray-200 hover:bg-slate-300"
+                className="px-2  cursor-pointer max-h-7 flex justify-center items-center max-w-7 text-xl font-bold bg-gray-200 hover:bg-slate-300"
               >
                 -
               </h1>
@@ -271,7 +271,7 @@ const [handleRatting, sethandleRatting] = useState(false);
 
           <Grid container>
             <div className="border p-5 w-full">
-              <Grid className="space-y-5 w-full">
+              <Grid className="space-y-5 w-full ">
                 <Ratting product={product} sethandleRatting={sethandleRatting} userRatting={userRatting} />
               </Grid>
             </div>

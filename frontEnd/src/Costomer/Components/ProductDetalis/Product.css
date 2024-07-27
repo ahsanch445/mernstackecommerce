@@ -65,7 +65,7 @@ header {
 
 /* Item Info */
 .main-info h4{
-    font-size: 21px;
+   
     margin-bottom: 0;
     font-weight: 400
 }
@@ -97,6 +97,15 @@ header {
     color: rgb(168, 14, 14);
     font-size: 14px;
 }
+.alo{
+    font-size: 20px;
+}
+@media (min-width: 768px) {
+   .alo{
+    font-size: 35px;
+   }
+  }
+  
 
 /* Select Items */
 
@@ -136,8 +145,7 @@ header {
     position: relative;
     background: #0652DD;
     cursor: pointer;
-    height: 4vw;
-    width: 17vw;
+   
     overflow: hidden;
     transition: transform 0.4s ease;
     z-index: 1;
