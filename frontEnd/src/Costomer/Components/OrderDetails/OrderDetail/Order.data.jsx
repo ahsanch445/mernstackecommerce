@@ -21,10 +21,10 @@ const OrderData = ({data,deliveryStatus,createdAt,handleData}) => {
         </div>
       </div>
      <div className='flex flex-col gap-6 absolute left-[40%] justify-center items-center'>
-     <div><p>Rs{data.price}</p></div>
+     <div><p>Rs{data?.price}</p></div>
 
      {
-      deliveryStatus=="Delivered Order"?<div> <button  onClick={()=>handleData(data.productId)} className='  p-1   rounded text-green-600 '><ReviewsIcon/> </button></div>:""
+      deliveryStatus=="Delivered Order"?<div> <button  onClick={()=>handleData(data?.productId)} className='  p-1   rounded text-green-600 '><ReviewsIcon/> </button></div>:""
 
      }
      </div>
