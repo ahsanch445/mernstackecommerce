@@ -26,9 +26,9 @@ const handalproductdetails =()=>{
   return (
     <>
       {
-        <div className="p-2 flex justify-center items-center ">
+        <div className="p-2   flex justify-center items-center ">
           <div className="flex gap-6">
-            <div className="h- w-52 p-1 rounded-md cursor-pointer shadow-xl bg-white">
+            <div className="md:w-64 w-52 p-1 rounded-md cursor-pointer shadow-xl bg-white">
               <div onClick={() => {
                 handalproductdetails()
                 handalAddToCart(data)
@@ -39,14 +39,14 @@ const handalproductdetails =()=>{
                   alt=""
                   srcset=""
                 />
-                <h1 className=" px-1  font-bold text-lg">{data?.productname}</h1>
+                <h1 className=" px-1 md:mt-2 md:text-xl  font-bold text-lg">{data?.productname}</h1>
                 <hr />
                 <div className=" px-1 flex justify-between items-center mt-2 mb-2">
-                  <h1 className="font-medium">Rs {data?.selling_price}</h1>
+                  <h1 className="font-medium text-lg">Rs {data?.selling_price}</h1>
                   <span className="flex justify-center">
                     <div className="flex justify-center items-center">
-                      <span className="font-medium">{data?.ratting}</span>
-                      <div className="flex justify-center">
+                      <span className="font-medium md:text-xl">{data?.ratting}</span>
+                      <div className="flex justify-center md:text-xl">
                         <CustomRating
                           rating={data?.ratting}
                         />

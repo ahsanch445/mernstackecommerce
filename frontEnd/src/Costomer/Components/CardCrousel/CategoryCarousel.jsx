@@ -96,9 +96,11 @@ const sendDataToBackend = async () => {
           >
         
      
-        {data?.map((e, index) => (
+      
+       {data?.map((e, index) => (
               <CategoryProducts key={index} data={e} />
             ))}
+     
     
     
           </Carousel>
