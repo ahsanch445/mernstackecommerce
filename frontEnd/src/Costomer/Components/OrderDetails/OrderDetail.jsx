@@ -45,7 +45,7 @@ const OrderDetail = () => {
   }, [])
 
   return (
-    <div className='p-4 relative justify-between '>
+    <div className='p-4 relative justify-between h-screen bg-green-700'>
 
       <div className='fixed'>
         <Filter selectedStatus={selectedStatus} setSelectedStatus={setSelectedStatus} />
