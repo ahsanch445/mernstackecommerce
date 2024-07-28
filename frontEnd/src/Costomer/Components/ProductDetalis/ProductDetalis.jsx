@@ -27,6 +27,7 @@ const [handleRatting, sethandleRatting] = useState(false);
   let navigate = useNavigate();
   const location = useLocation();
   let dispatch = useDispatch();
+  let user = localStorage.getItem('user');
   
   const { product } = location.state || {};
 
@@ -121,7 +122,7 @@ const [handleRatting, sethandleRatting] = useState(false);
           <div className="item-list-vertical w-28 lg:w-12 ">
             {product?.productimage?.map((image, index) => (
               <div className="thumb-box   " key={index}>
-                <img 
+                <img className='md:pointer-events-none lg:pointer-events-auto'
                   onClick={() => handalImageClik(image)}
                   src={image}
                   alt="thumbnail"
@@ -133,11 +134,12 @@ const [handleRatting, sethandleRatting] = useState(false);
             <div className="image-con">
               {!imgUrl ? (
                 <img
+                
                   onMouseMove={handleMouseMove}
                   ref={imgRef}
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}
-                  className="cursor-pointer max-w-72 max-h-[600px] lg:max-h-[340px] rounded-md object-top lg:max-w-64"
+                  className=" md:pointer-events-none lg:pointer-events-auto cursor-pointer max-w-72 max-h-[600px] lg:max-h-[340px] rounded-md object-top lg:max-w-64"
                   src={product?.productimage[0]}
                   alt="default"
                 />
@@ -215,6 +217,7 @@ const [handleRatting, sethandleRatting] = useState(false);
               <div className="flex justify-center items-center ml-32 ">
                 <button
                   onClick={() => {
+                   !user?navigate("/login"):
                     navigate(`/Checkout/${5}`, {
                       state: { size: isSize },
                     });

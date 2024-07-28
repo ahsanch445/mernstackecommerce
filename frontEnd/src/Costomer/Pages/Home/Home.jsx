@@ -17,13 +17,13 @@ useEffect(() => {
  const getUser = async () => {
 
   try {
-    const res = await axios.get("http://localhost:3000/users/profile",{
+    const res = await axios.get("https://ecommerce-api-one-iota.vercel.app/users/profile",{
       headers:{
         Authorization:`${token}`
       }
     })
     localStorage.setItem("user",JSON.stringify(res.data))
-     console.log(res.data)
+     console.log(res)
   } catch (error) {
     console.log(error.message)
   }

@@ -6,6 +6,7 @@ import cookies from "js-cookie"
 import {  ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toastContext } from "../../../Context-Api/Context";
+import GoogleAuth from "../../Components/OuthGoogle/AuthGoogle";
 // import Outh from "../../Components/Googleouth/Outh";
 
 const Login = () => {
@@ -59,7 +60,7 @@ try {
  
   }
 } catch (error) {
-  console.log(error)
+  
   toast.error(error?.response?.data?.message)
   console.error(error)
 }
@@ -104,7 +105,7 @@ try {
               </button>
             </div>
             <div className="bottom-text">
-              <p className="text-4xl lg:text-lg ">
+              <p className="text-4xl lg:mt-2 mt-10 lg:text-lg ">
                 Don't have an account? <Link to="/signup">Sign Up</Link>
               
               </p>
@@ -114,7 +115,7 @@ try {
              
             </div>
            <div className=" flex justify-center mt-3">
-           {/* <Outh/> */}
+           <GoogleAuth/>
            </div>
           </form>
         

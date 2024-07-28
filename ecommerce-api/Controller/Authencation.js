@@ -147,10 +147,9 @@ const verifyEmail = async (req, res) => {
 //   }
 // };
 const googleOuth = async (req, res) => {
-  console.log(req.body);
   try {
     let user = await UserModel.findOne({ sub: req.body.sub });
-    console.log("hello");
+
     if (!user) {
       const newUser = {
         fullname: req.body.name,

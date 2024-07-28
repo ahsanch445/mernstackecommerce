@@ -11,7 +11,7 @@ const OrderDetail = () => {
   const [myorders, setmyorders] = useState([])
   const [selectedStatus, setSelectedStatus] = useState('');
   let userId = JSON.parse(localStorage.getItem("user"))
-  
+  console.log(userId)
   let filterData = myorders?.filter((elem) => {
     return elem?.deliveryStatus?.includes(selectedStatus)
   })
@@ -35,9 +35,13 @@ const OrderDetail = () => {
     }
   }
   const myOrder = async () => {
+  try {
     let allData = await axios.post("https://ecommerce-api-one-iota.vercel.app/order/myorders", { userId: userId._id })
-
+console.log(allData)
     setmyorders(allData.data)
+  } catch (error) {
+    console.log(error.message)
+  }
   }
   useEffect(() => {
     myOrder()
@@ -45,7 +49,7 @@ const OrderDetail = () => {
   }, [])
 
   return (
-    <div className='p-4 relative justify-between h-screen bg-green-700'>
+    <div className='p-4 relative justify-between h-screen '>
 
       <div className='fixed'>
         <Filter selectedStatus={selectedStatus} setSelectedStatus={setSelectedStatus} />

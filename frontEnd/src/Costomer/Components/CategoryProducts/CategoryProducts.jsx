@@ -13,7 +13,7 @@ const CategoryProducts = ({data}) => {
 
  let navigte = useNavigate()
  let dispatch = useDispatch()
-
+let user = localStorage.getItem("user")
  const handalAddToCart =(data1)=>{
 
   dispatch(setAddToCart({isProductDetails:false,product:data1}))
@@ -26,9 +26,9 @@ const handalproductdetails =()=>{
   return (
     <>
       {
-        <div className="p-2   flex justify-center items-center ">
+        <div className=" lg:p-3   flex justify-center items-center ">
           <div className="flex gap-6">
-            <div className="w-[300px] h-[450px] lg:h-96 lg:w-52 p-1 rounded-md cursor-pointer shadow-xl bg-white">
+            <div className="w-[280px] h-[450px] lg:h-96 lg:w-52 p-1 rounded-md cursor-pointer shadow-xl bg-white">
               <div onClick={() => {
                 handalproductdetails()
                 handalAddToCart(data)
@@ -58,7 +58,10 @@ const handalproductdetails =()=>{
               </div>
               <div className="py-2 px-4">
                 <div className="button mt-2">
-                  <button onClick={() => handalAddToCart(data)} className="text-white bg-blue-700 md:px-5 md:py:4 px-3 py-2 hover:scale-105 duration-300 hover:bg-blue-800 font-medium rounded-md">
+                  <button onClick={() =>{ 
+                    !user? navigte("/login"):
+                    handalAddToCart(data)
+                    }} className="text-white bg-blue-700 md:px-5 md:py:4 px-3 py-2 hover:scale-105 duration-300 hover:bg-blue-800 font-medium rounded-md">
                     {" "}
                     Add To Cart
                   </button>

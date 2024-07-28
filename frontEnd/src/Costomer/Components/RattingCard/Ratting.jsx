@@ -73,7 +73,7 @@ const Ratting = ({ userRatting,sethandleRatting,product}) => {
         Smiliar Product
       </h1>
    
-      <div  className='flex mt-3 flex-wrap gap-11 px-5   cursor-pointer'>
+      <div  className='flex mt-3 gap-5 flex-wrap px-5   cursor-pointer'>
       {data?.map((e,index)=><CategoryProducts key={index} data={e} />)}
       </div>
     </div>
